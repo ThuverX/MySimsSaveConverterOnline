@@ -101,7 +101,7 @@ export default function Home() {
                     <li>Your Cozy Bundle save games can be found in <code>%LOCALAPPDATA%/Electronic Arts/MySims</code></li>
                     <li>And your old save games can be found in <code>%USERPROFILE%/Documents/Electronic Arts/MySims</code></li>
                 </ul>
-                <h2>Check out the source code for this website on <a href="" className="text-blue-500">Github</a></h2>
+                <h2>Check out the source code for this website on <a href="https://github.com/ThuverX/MySimsSaveConverterOnline" className="text-blue-500">Github</a></h2>
             </div>
         </div>
     );
