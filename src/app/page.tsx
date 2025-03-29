@@ -51,6 +51,7 @@ export default function Home() {
         saveAs(await zip.blob(), converter.saveName + ".zip")
     }
 
+    // @ts-ignore
     return (
         <div className="flex items-center justify-center grow min-h-screen ">
             <div className="flex flex-col">
@@ -71,6 +72,10 @@ export default function Home() {
                             <Upload className="m-auto"/>
                             <Input
                                 type="file"
+                                /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+                                // @ts-expect-error
+
+                                // REALLY??
                                 webkitdirectory="true"
                                 className="cursor-pointer"
                                 onChange={(e) => handleFolder([...e.target.files!]) }
