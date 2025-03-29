@@ -32,10 +32,10 @@ export class FileEntry {
     }
 
     public async fromFolder(file: File) {
-        this.Name = file.webkitRelativePath
+        this.Name = file.webkitRelativePath.split(/[\\/]/).slice(1).join("/")
         this.Size = file.size
         this.DataUncompressed = new Uint8Array(await file.arrayBuffer())
-        this.DataCompressed = zlib.deflateRawSync(Buffer.from(this.DataUncompressed), {
+        this.DataCompressed = zlib.deflateSync(Buffer.from(this.DataUncompressed), {
             level: -1
         })
         this.Checksum = 1
@@ -93,7 +93,7 @@ export class SaveConverter {
     public async fromFolder(files: File[]): Promise<number> {
         this.files = []
 
-        this.saveName = files[0].webkitRelativePath.split(/\\|\//)[0]
+        this.saveName = files[0].webkitRelativePath.split(/[\\/]/)[0]
 
         console.log(files[0].webkitRelativePath)
 
