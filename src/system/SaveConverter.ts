@@ -1,5 +1,5 @@
-﻿import { Buffer } from "node:buffer";
-import zlib from 'node:zlib';
+﻿import { Buffer } from "buffer";
+import zlib from 'zlib';
 
 export class FileEntry {
 
