@@ -10,6 +10,7 @@ export class FileEntry {
     public DataCompressed: Uint8Array  = new Uint8Array ()
     public DataUncompressed: Uint8Array  = new Uint8Array ()
     public Checksum: number = 0
+    public HasChanged: boolean = false
 
     public read(view: DataView, offset: number): number {
         this.NameLength = view.getUint32(offset, true); offset+=4
@@ -43,6 +44,16 @@ export class FileEntry {
 
     public GetText() {
         return new TextDecoder("utf-8").decode(this.DataUncompressed)
+    }
+
+    public SetText(text: string) {
+        this.DataUncompressed = new TextEncoder().encode(text)
+        this.DataCompressed = zlib.deflateSync(Buffer.from(this.DataUncompressed), {
+            level: -1
+        })
+        this.Size = this.DataCompressed.length
+        this.UncompressedSize = this.DataUncompressed.length
+        this.HasChanged = true
     }
 
     public write(view: DataView, offset: number): number {
@@ -94,8 +105,6 @@ export class SaveConverter {
         this.files = []
 
         this.saveName = files[0].webkitRelativePath.split(/[\\/]/)[0]
-
-        console.log(files[0].webkitRelativePath)
 
         for(const file of files) {
             const entry = new FileEntry()
