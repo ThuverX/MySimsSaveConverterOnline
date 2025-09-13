@@ -4,7 +4,7 @@
 
 @font-face {
     font-family: 'trebucbd';
-    src: url('/trebucbd.ttf');
+    src: url('../../public/trebucbd.ttf');
 }
 @theme {
   --font-trebuchet: 'trebucbd';
