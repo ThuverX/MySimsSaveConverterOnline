@@ -79,9 +79,9 @@ export function useMaps() {
                 doc.querySelectorAll("Building"),
             ).map((building) => {
                 //eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-                const position = building.querySelector("Translation")?.textContent.trim().split(" ").map(parseFloat)!;
+                const position: number[] = building.querySelector("Translation")?.textContent.trim().split(" ").map(parseFloat)!;
                 //eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-                const name = building.querySelector("ObjectDef")?.textContent!;
+                const name: string = building.querySelector("ObjectDef")?.textContent!;
 
                 return ({
                     x: position[0],
