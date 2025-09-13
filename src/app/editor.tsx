@@ -27,7 +27,12 @@ import {
 	SidebarRail,
 } from "@/components/ui/sidebar";
 import { useAtom, useAtomValue } from "jotai";
-import { activeFileAtom, changedFilePathsAtom, filesAtom, useHasChanged } from "./state";
+import {
+	activeFileAtom,
+	changedFilePathsAtom,
+	filesAtom,
+	useHasChanged,
+} from "./state";
 import { useEffect, useState } from "react";
 import { FileEntry } from "@/system/SaveConverter";
 
@@ -35,6 +40,8 @@ import MonacoEditor from "@monaco-editor/react";
 import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { initMonaco } from "./manaco";
 import { useTheme } from "next-themes";
+import { GCTImage } from "@/system/GCTImage";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface TreeItem {
 	type: "file" | "folder";
@@ -47,15 +54,32 @@ const Editor = () => {
 	const files = useAtomValue(filesAtom);
 	const [tree, setTree] = useState<TreeItem[]>([]);
 	const activeFile = useAtomValue(activeFileAtom);
-	const [ changedFilePaths, setChangedFilePaths ] = useAtom(changedFilePathsAtom);
+	const [changedFilePaths, setChangedFilePaths] = useAtom(
+		changedFilePathsAtom,
+	);
 	const theme = useTheme();
+	const [textureImage, setTextureImage] = useState<HTMLImageElement | null>(
+		null,
+	);
 
 	useEffect(() => {
 		if (files.length <= 0) return setTree([]);
 
 		setTree(filesToTree(files));
-		setChangedFilePaths(files.filter(f => f.HasChanged).map(f => f.Name));
+		setTextureImage(null);
+		setChangedFilePaths(
+			files.filter((f) => f.HasChanged).map((f) => f.Name),
+		);
 	}, [files]);
+
+	useEffect(() => {
+		if (activeFile?.Name.toLowerCase().endsWith(".texture")) {
+			const gct = new GCTImage();
+			gct.read(new DataView(activeFile.GetData().buffer), 0);
+			gct.convertToImage();
+			setTextureImage(gct.imageElement);
+		}
+	}, [activeFile]);
 
 	return (
 		<div className="flex grow">
@@ -80,22 +104,64 @@ const Editor = () => {
 						{activeFile ? activeFile.Name : "No file selected"}
 					</DialogTitle>
 				</DialogHeader>
-				<MonacoEditor
-					defaultLanguage="xml"
-					value={activeFile ? activeFile.GetText() : ""}
-					onChange={(value) => {
-						if (activeFile && value !== undefined) {
-							files.find(f => f.Name === activeFile.Name)?.SetText(value);
-							if(!changedFilePaths.includes(activeFile.Name)) {
-								setChangedFilePaths([...changedFilePaths, activeFile.Name])
-							}
-						}
-					}}
-					beforeMount={initMonaco}
-					theme={theme.resolvedTheme === "dark"
-						? "shadcn-dark"
-						: "shadcn-light"}
-				/>
+				{(activeFile?.Name.toLowerCase().endsWith(".texture") &&
+						textureImage)
+					? (
+						<div className="flex grow items-center justify-center">
+							<img
+								className="h-full object-contain"
+								style={{ imageRendering: "pixelated" }}
+								src={textureImage.src}
+							/>
+						</div>
+					)
+					: activeFile?.Name.toLowerCase().endsWith(".textures")
+					? (
+						<div className="flex grow items-center justify-center">
+							<Alert variant="destructive" className="w-auto">
+								<AlertDescription>
+									Can't view this file type
+								</AlertDescription>
+							</Alert>
+						</div>
+					)
+					: activeFile
+					? (
+						<MonacoEditor
+							defaultLanguage="xml"
+							value={activeFile ? activeFile.GetText() : ""}
+							onChange={(value) => {
+								if (activeFile && value !== undefined) {
+									files.find((f) =>
+										f.Name === activeFile.Name
+									)?.SetText(value);
+									if (
+										!changedFilePaths.includes(
+											activeFile.Name,
+										)
+									) {
+										setChangedFilePaths([
+											...changedFilePaths,
+											activeFile.Name,
+										]);
+									}
+								}
+							}}
+							beforeMount={initMonaco}
+							theme={theme.resolvedTheme === "dark"
+								? "shadcn-dark"
+								: "shadcn-light"}
+						/>
+					)
+					: (
+						<div className="flex grow items-center justify-center">
+							<Alert className="w-auto">
+								<AlertDescription>
+									No file selected
+								</AlertDescription>
+							</Alert>
+						</div>
+					)}
 			</div>
 		</div>
 	);

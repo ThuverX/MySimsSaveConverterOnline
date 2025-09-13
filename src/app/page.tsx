@@ -2,12 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Edit, LucideHammer, LucideStar } from "lucide-react";
+import { AlertCircleIcon, Edit, LucideHammer, LucideStar } from "lucide-react";
 import { SaveConverter } from "@/system/SaveConverter";
 import { saveAs } from "file-saver";
 import { downloadZip } from "client-zip";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { CozyBundleIcon, OriginalIcon } from "./icons";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 import { useAtom } from "jotai";
 import { filesAtom, isEditorOpenAtom, useStats } from "./state";
@@ -20,6 +21,8 @@ import {
 } from "@/components/ui/tooltip";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import Map from "./map";
+import PlayerImage from "./playerimage";
 
 const converter = new SaveConverter();
 
@@ -72,7 +75,7 @@ export default function Home() {
                 <ModeToggle />
             </div>
             <div className="flex grow lg:max-w-5/8 mx-auto border-l-1 border-r-1 border-secondary min-h-screen">
-                <div className="prose p-10 min-w-full">
+                <div className="prose p-10 min-w-full flex flex-col">
                     <h1>MySims Save Converter</h1>
                     <p>
                         Use this tool to convert your save files from Cozy
@@ -80,7 +83,7 @@ export default function Home() {
                     </p>
                     <ul>
                         <li>
-                            Drop in your <code>.sav</code> <b>file</b>{" "}
+                            Select your <code>.sav</code> <b>file</b>{" "}
                             from MySims Cozy Bundle
                             <CozyBundleIcon />
                             <br />
@@ -125,7 +128,7 @@ export default function Home() {
                             onClick={() =>
                                 document.getElementById("file-input")?.click()}
                         >
-                            <CozyBundleIcon />Open CozyBundle Save
+                            <CozyBundleIcon />Open Cozy Bundle Save
                         </Button>
                         <Button
                             className="cursor-pointer"
@@ -135,37 +138,44 @@ export default function Home() {
                             <OriginalIcon />Open MySims SaveGame
                         </Button>
                     </div>
-                    <h2>Stats</h2>
-                    { (stats.SimName !== "Unknown" && stats.TownName !== "Unknown") ? (
-                    <div className="flex flex-col">
-                        <span>Sim Name: {stats.SimName}</span>
-                        <span>Town Name: {stats.TownName}</span>
-                        <span className="flex">
-                            Number of Stars: {stats.NumStars}{" "}
-                            <div className="flex ml-4">
+                    {/* <div className="flex">
+                    <Map name="townsquare.world"/>
+                    <Map name="forest.world"/>
+                    <Map name="desert.world"/>
 
-                            {new Array(5).fill(null).map((
-                                _,
-                                i,
-                            ) => (
-                                i < stats.NumStars ? (
-                                    <LucideStar
-                                        key={i}
-                                        className="text-yellow-400"
-                                    />
-                                ) : (
-                                    <LucideStar
-                                        key={i}
-                                        className="text-gray-400"
-                                    />
-                            )))}
+                    </div> */}
+                    {(stats.loaded)
+                        ? (
+                            <div className="bg-[#0eb5c4] rounded-xl mt-8 flex items-center gap-4 font-trebuchet text-2xl relative">
+                                <PlayerImage style={{ imageRendering: "pixelated" }} className="flex h-40 w-40 border-8 bg-[#57cbd6] rounded-xl border-[#00414a] my-4 ml-4" />
+
+                                <div className="flex flex-col mr-4 py-4 h-40 justify-between">
+                                    <span>Sim Name: {stats.SimName}</span>
+                                    <span>Town Name: {stats.TownName}</span>
+                                    <span>Time Played: {stats.TimePlayed}</span>
+                                </div>
+                                <div className="absolute top-0 right-0 w-full h-full pointer-events-none">
+                                    {new Array(5).fill(null).map((_, i) => (
+                                        <img
+                                            src={i < stats.NumStars
+                                                ? "star-filled.png"
+                                                : "star.png"}
+                                            key={i}
+                                            style={{
+                                                top: "calc(((var(--spacing) * 48) - (var(--spacing) * 10)) / 2)",
+                                                right:
+                                                    "calc(((var(--spacing) * 48) - (var(--spacing) * 10)) / 2)",
+                                                transform: `rotate(${
+                                                    (i / 5) * 120 - 90
+                                                }deg) translate(100%,0) scale(0.7) `,
+                                            }}
+                                            className="w-20 h-20 absolute !m-0"
+                                        />
+                                    ))}
+                                </div>
                             </div>
-                        </span>
-                        {/* <span>Time Played: {stats.TimePlayed}</span> */}
-                    </div>
-                    ) : (
-                        <span>Select a save file to see your stats.</span>
-                    )}
+                        )
+                        : null}
                     <h2>Actions</h2>
                     <div className="flex gap-4 my-2">
                         <Tooltip>
@@ -216,6 +226,20 @@ export default function Home() {
                                 </Button>
                             </TooltipTrigger>
                         </Tooltip>
+                    </div>
+                    <div className="flex flex-col gap-4 mt-auto">
+                        <Alert variant="default">
+                            <AlertDescription className="flex">
+                                Report any issues on <a href="https://github.com/ThuverX/MySimsSaveConverterOnline">Github</a>
+                            </AlertDescription>
+                        </Alert>
+                        <Alert variant="default">
+                            <AlertCircleIcon />
+                            <AlertTitle>Disclaimer</AlertTitle>
+                            <AlertDescription>
+                                This website is a fan-made project and is not affiliated with, endorsed by, or sponsored by Electronic Arts Inc., Maxis, or the MySims franchise. All trademarks and copyrights are the property of their respective owners.
+                            </AlertDescription>
+                        </Alert>
                     </div>
                 </div>
             </div>

@@ -1,261 +1,218 @@
-	// if  which == "STRING_HOUSE_WORKSHOP" then												return "uitexture-map-icon-workshop"
-	// elseif which == "STRING_HOUSE_CharacterDefs/NPC_TrainStationManager_1_Def.xml" then		return "uitexture-map-icon-train"
-	// elseif  which  == "STRING_UNOCCUPIED_LOT" then											return "uitexture-map-icon-empty-lot"
-	// elseif  which == "STRING_HOUSE_CharacterDefs/ChefDef.xml" then							return "uitexture-map-icon-italian"
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_ArcadeGuy_1_Def.xml" then				return "uitexture-map-icon-gamesarcade"
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_BoutiqueManager_1_Def.xml" then		return "uitexture-map-icon-boutique"
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_CostumeGirl_1_Def.xml" then			return "uitexture-map-icon-costumeshop"
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_DiscoDJ_1_Def.xml" then				return "uitexture-map-icon-disco"
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_DramaticActor_1_Def.xml" then			return "uitexture-map-icon-dramatictheater"
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_EssenceMaster_1_Def.xml" then			return "uitexture-map-icon-observatory" -- THIS IS NOT RIGHT!  -- THIS IS NOT RIGHT!
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_FloristYounger1_Def.xml" then			return "uitexture-map-icon-florist" 
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_FortuneTeller_1_Def.xml" then			return "uitexture-map-icon-fortuneteller" 
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_GothBoy_1_Def.xml" then				return "uitexture-map-icon-hauntedhouse" 
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_IceCreamGirl_1_Def.xml" then			return "uitexture-map-icon-icecreamshop" 
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_KickboxingMaster_1_Def.xml" then		return "uitexture-map-icon-kickboxing" 
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_Librarian_1_Def.xml" then				return "uitexture-map-icon-library" 
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_MadScientist_1_Def.xml" then			return "uitexture-map-icon-madscientist" 
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_Mayor_Def.xml" then					return "uitexture-map-icon-townhall" 
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_MuseumCurator_1_Def.xml" then			return "uitexture-map-icon-museum" 
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_ObservatoryProfessor_1_Def.xml" then	return "uitexture-map-icon-observatory" 
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_PirateGinny_1_Def.xml" then			return "uitexture-map-icon-pirateginny" 
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_SeanceGhost_Def.xml" then				return "uitexture-map-icon-hauntedhouse" -- is this right?
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_Stylist_1_Def.xml" then				return "uitexture-map-icon-salon"  
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_SushiFather_1_Def.xml" then			return "uitexture-map-icon-sushibar"  
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_HotelManager_1_Def.xml" then			return "uitexture-map-icon-hotel"  
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_Witch_Wendalyn_1_Def.xml" then			return "uitexture-map-icon-cauldron-creation"  
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_SecretAgent_Virginia_1_Def.xml" then	return "uitexture-map-icon-SIM"  
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_RoboLab_Alexa_1_Def.xml" then			return "uitexture-map-icon-robo-lab"  
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_Pool_Flipper_1_Def.xml" then			return "uitexture-map-icon-pool"  
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_Cafe_Cedella_1_Def.xml" then			return "uitexture-map-icon-cafe"  
-	// elseif  which == "STRING_HOUSE_CharacterDefs/NPC_ToyStore_Terry_1_Def.xml" then			return "uitexture-map-icon-toy-store"  	
-	// elseif  which == "STRING_HOUSE_0" then	 												return "uitexture-map-icon-house-cute"
-	// elseif  which == "STRING_HOUSE_1" then													return "uitexture-map-icon-house-fun"
-	// elseif  which == "STRING_HOUSE_2" then													return "uitexture-map-icon-house-geeky"
-	// elseif  which == "STRING_HOUSE_3" then	 												return "uitexture-map-icon-house-spooky"
-	// elseif  which == "STRING_HOUSE_4" then													return "uitexture-map-icon-house-studious"
-	// elseif  which == "STRING_HOUSE_5" then													return "uitexture-map-icon-house-tasty"
-	
-
-
 {
     "defs_to_icons": {
-        "NPC_Mayor_Def": "uitexture-map-icon-townhall"
+        "WORKSHOP": "uitexture-map-icon-workshop",
+        "CharacterDefs/NPC_TrainStationManager_1_Def.xml": "uitexture-map-icon-train",
+        "CharacterDefs/ChefDef.xml": "uitexture-map-icon-italian",
+        "CharacterDefs/NPC_ArcadeGuy_1_Def.xml": "uitexture-map-icon-gamesarcade",
+        "CharacterDefs/NPC_BoutiqueManager_1_Def.xml": "uitexture-map-icon-boutique",
+        "CharacterDefs/NPC_CostumeGirl_1_Def.xml": "uitexture-map-icon-costumeshop",
+        "CharacterDefs/NPC_DiscoDJ_1_Def.xml": "uitexture-map-icon-disco",
+        "CharacterDefs/NPC_DramaticActor_1_Def.xml": "uitexture-map-icon-dramatictheater",
+        "CharacterDefs/NPC_EssenceMaster_1_Def.xml": "uitexture-map-icon-observatory",
+        "CharacterDefs/NPC_FloristYounger1_Def.xml": "uitexture-map-icon-florist",
+        "CharacterDefs/NPC_FortuneTeller_1_Def.xml": "uitexture-map-icon-fortuneteller",
+        "CharacterDefs/NPC_GothBoy_1_Def.xml": "uitexture-map-icon-hauntedhouse",
+        "CharacterDefs/NPC_IceCreamGirl_1_Def.xml": "uitexture-map-icon-icecreamshop",
+        "CharacterDefs/NPC_KickboxingMaster_1_Def.xml": "uitexture-map-icon-kickboxing",
+        "CharacterDefs/NPC_Librarian_1_Def.xml": "uitexture-map-icon-library",
+        "CharacterDefs/NPC_MadScientist_1_Def.xml": "uitexture-map-icon-madscientist",
+        "CharacterDefs/NPC_Mayor_Def.xml": "uitexture-map-icon-townhall",
+        "CharacterDefs/NPC_MuseumCurator_1_Def.xml": "uitexture-map-icon-museum",
+        "CharacterDefs/NPC_ObservatoryProfessor_1_Def.xml": "uitexture-map-icon-observatory",
+        "CharacterDefs/NPC_PirateGinny_1_Def.xml": "uitexture-map-icon-pirateginny",
+        "CharacterDefs/NPC_SeanceGhost_Def.xml": "uitexture-map-icon-hauntedhouse",
+        "CharacterDefs/NPC_Stylist_1_Def.xml": "uitexture-map-icon-salon",
+        "CharacterDefs/NPC_SushiFather_1_Def.xml": "uitexture-map-icon-sushibar",
+        "CharacterDefs/NPC_HotelManager_1_Def.xml": "uitexture-map-icon-hotel",
+        "CharacterDefs/NPC_Witch_Wendalyn_1_Def.xml": "uitexture-map-icon-cauldron-creation",
+        "CharacterDefs/NPC_SecretAgent_Virginia_1_Def.xml": "uitexture-map-icon-SIM",
+        "CharacterDefs/NPC_RoboLab_Alexa_1_Def.xml": "uitexture-map-icon-robo-lab",
+        "CharacterDefs/NPC_Pool_Flipper_1_Def.xml": "uitexture-map-icon-pool",
+        "CharacterDefs/NPC_Cafe_Cedella_1_Def.xml": "uitexture-map-icon-cafe",
+        "CharacterDefs/NPC_ToyStore_Terry_1_Def.xml": "uitexture-map-icon-toy-store",
+        "0": "uitexture-map-icon-house-cute",
+        "1": "uitexture-map-icon-house-fun",
+        "2": "uitexture-map-icon-house-geeky",
+        "3": "uitexture-map-icon-house-spooky",
+        "4": "uitexture-map-icon-house-studious",
+        "5": "uitexture-map-icon-house-tasty"
     },
-    "icon": [
+    "maps_to_icons": {
+        "desert.world": "uitexture-map-level-desert",
+        "forest.world": "uitexture-map-level-forest",
+        "townsquare.world": "uitexture-map-level-classic"
+    },
+    "icons": [
         {
-            "id": "0x00000000!0x000000000bc6eca3.dds",
-            "def": "NPC_Mayor_Def",
+            "id": "0x00000000!0x000000000bc6eca3.png",
             "name": "uitexture-map-icon-townhall"
         },
         {
-            "id": "0x00000000!0x000000000e7739f0.dds",
-            "def": "",
+            "id": "0x00000000!0x000000000e7739f0.png",
             "name": "uitexture-map-icon-title"
         },
         {
-            "id": "0x00000000!0x000000001238434c.dds",
-            "def": "NPC_RoboLab_Alexa_1_Def",
+            "id": "0x00000000!0x000000001238434c.png",
             "name": "uitexture-map-icon-robo-lab"
         },
         {
-            "id": "0x00000000!0x00000000153b324d.dds",
-            "def": "",
+            "id": "0x00000000!0x00000000153b324d.png",
             "name": "uitexture-map-icon-workshop"
         },
         {
-            "id": "0x00000000!0x00000000180b5324.dds",
-            "def": "NPC_Pool_Flipper_1_Def",
+            "id": "0x00000000!0x00000000180b5324.png",
             "name": "uitexture-map-icon-pool"
         },
         {
-            "id": "0x00000000!0x000000001e1d387d.dds",
-            "def": "NPC_KickboxingMaster_1_Def",
+            "id": "0x00000000!0x000000001e1d387d.png",
             "name": "uitexture-map-icon-kickboxing"
         },
         {
-            "id": "0x00000000!0x00000000227843c2.dds",
-            "def": "NPC_Witch_Wendalyn_1_Def",
+            "id": "0x00000000!0x00000000227843c2.png",
             "name": "uitexture-map-icon-cauldron-creation"
         },
         {
-            "id": "0x00000000!0x0000000025342d5d.dds",
-            "def": "",
+            "id": "0x00000000!0x0000000025342d5d.png",
             "name": "uitexture-map-icon-house-studious"
         },
         {
-            "id": "0x00000000!0x000000002e5902d3.dds",
-            "def": "NPC_ArcadeGuy_1_Def",
+            "id": "0x00000000!0x000000002e5902d3.png",
             "name": "uitexture-map-icon-gamesarcade"
         },
         {
-            "id": "0x00000000!0x000000003445ba86.dds",
-            "def": "NPC_MadScientist_1_Def",
+            "id": "0x00000000!0x000000003445ba86.png",
             "name": "uitexture-map-icon-madscientist"
         },
         {
-            "id": "0x00000000!0x0000000034ef2f7b.dds",
-            "def": "",
+            "id": "0x00000000!0x0000000034ef2f7b.png",
             "name": "uitexture-map-icon-empty-lot"
         },
         {
-            "id": "0x00000000!0x000000003960651a.dds",
-            "def": "NPC_ObservatoryProfessor_1_Def",
+            "id": "0x00000000!0x000000003960651a.png",
             "name": "uitexture-map-icon-observatory"
         },
         {
-            "id": "0x00000000!0x000000003c02261c.dds",
-            "def": "NPC_DramaticActor_1_Def",
+            "id": "0x00000000!0x000000003c02261c.png",
             "name": "uitexture-map-icon-dramatictheater"
         },
         {
-            "id": "0x00000000!0x000000003ed857bf.dds",
-            "def": "NPC_SecretAgent_Virginia_1_Def",
+            "id": "0x00000000!0x000000003ed857bf.png",
             "name": "uitexture-map-icon-SIM"
         },
         {
-            "id": "0x00000000!0x000000004c4e2924.dds",
-            "def": "",
+            "id": "0x00000000!0x000000004c4e2924.png",
             "name": "uitexture-map-icon-myhouse"
         },
         {
-            "id": "0x00000000!0x000000004ea0698d.dds",
-            "def": "NPC_FloristYounger1_Def",
+            "id": "0x00000000!0x000000004ea0698d.png",
             "name": "uitexture-map-icon-florist"
         },
         {
-            "id": "0x00000000!0x000000005be0fe2e.dds",
-            "def": "",
+            "id": "0x00000000!0x000000005be0fe2e.png",
             "name": "uitexture-map-icon-no-flag"
         },
         {
-            "id": "0x00000000!0x000000005c7447ee.dds",
-            "def": "NPC_ToyStore_Terry_1_Def",
+            "id": "0x00000000!0x000000005c7447ee.png",
             "name": "uitexture-map-icon-toy-store"
         },
         {
-            "id": "0x00000000!0x000000005ef22bad.dds",
-            "def": "NPC_FortuneTeller_1_Def",
+            "id": "0x00000000!0x000000005ef22bad.png",
             "name": "uitexture-map-icon-fortuneteller"
         },
         {
-            "id": "0x00000000!0x000000006ed518c7.dds",
-            "def": "",
+            "id": "0x00000000!0x000000006ed518c7.png",
             "name": "uitexture-map-level-junkyard"
         },
         {
-            "id": "0x00000000!0x00000000730d3043.dds",
-            "def": "",
+            "id": "0x00000000!0x00000000730d3043.png",
             "name": "uitexture-map-level-classic"
         },
         {
-            "id": "0x00000000!0x00000000768bbaee.dds",
-            "def": "NPC_PirateGinny_1_Def",
+            "id": "0x00000000!0x00000000768bbaee.png",
             "name": "uitexture-map-icon-pirateginny"
         },
         {
-            "id": "0x00000000!0x0000000077ffa338.dds",
-            "def": "",
+            "id": "0x00000000!0x0000000077ffa338.png",
             "name": "uitexture-map-icon-house-geeky"
         },
         {
-            "id": "0x00000000!0x000000007829bb1b.dds",
-            "def": "NPC_IceCreamGirl_1_Def",
+            "id": "0x00000000!0x000000007829bb1b.png",
             "name": "uitexture-map-icon-icecreamshop"
         },
         {
-            "id": "0x00000000!0x0000000080c725f3.dds",
-            "def": "NPC_SushiFather_1_Def",
+            "id": "0x00000000!0x0000000080c725f3.png",
             "name": "uitexture-map-icon-sushibar"
         },
         {
-            "id": "0x00000000!0x0000000085775cc9.dds",
-            "def": "NPC_Stylist_1_Def",
+            "id": "0x00000000!0x0000000085775cc9.png",
             "name": "uitexture-map-icon-salon"
         },
         {
-            "id": "0x00000000!0x000000009506bad4.dds",
-            "def": "NPC_TrainStationManager_1_Def",
+            "id": "0x00000000!0x000000009506bad4.png",
             "name": "uitexture-map-icon-train"
         },
         {
-            "id": "0x00000000!0x00000000950964ea.dds",
-            "def": "ChefDef",
+            "id": "0x00000000!0x00000000950964ea.png",
             "name": "uitexture-map-icon-italian"
         },
         {
-            "id": "0x00000000!0x0000000098b35584.dds",
-            "def": "",
+            "id": "0x00000000!0x0000000098b35584.png",
             "name": "uitexture-map-icon-house-tasty"
         },
         {
-            "id": "0x00000000!0x000000009987c243.dds",
-            "def": "NPC_Librarian_1_Def",
+            "id": "0x00000000!0x000000009987c243.png",
             "name": "uitexture-map-icon-library"
         },
         {
-            "id": "0x00000000!0x00000000a1461f04.dds",
-            "def": "NPC_DiscoDJ_1_Def",
+            "id": "0x00000000!0x00000000a1461f04.png",
             "name": "uitexture-map-icon-disco"
         },
         {
-            "id": "0x00000000!0x00000000a2c8192b.dds",
-            "def": "NPC_SeanceGhost_Def",
+            "id": "0x00000000!0x00000000a2c8192b.png",
             "name": "uitexture-map-icon-hauntedhouse"
         },
         {
-            "id": "0x00000000!0x00000000a96d9f90.dds",
-            "def": "",
+            "id": "0x00000000!0x00000000a96d9f90.png",
             "name": "uitexture-map-icon-house-spooky"
         },
         {
-            "id": "0x00000000!0x00000000aa1ffe74.dds",
-            "def": "NPC_BoutiqueManager_1_Def",
+            "id": "0x00000000!0x00000000aa1ffe74.png",
             "name": "uitexture-map-icon-boutique"
         },
         {
-            "id": "0x00000000!0x00000000aeaaf0fe.dds",
-            "def": "",
+            "id": "0x00000000!0x00000000aeaaf0fe.png",
             "name": "uitexture-map-icon-house-fun"
         },
         {
-            "id": "0x00000000!0x00000000af9b079a.dds",
-            "def": "NPC_MuseumCurator_1_Def",
+            "id": "0x00000000!0x00000000af9b079a.png",
             "name": "uitexture-map-icon-museum"
         },
         {
-            "id": "0x00000000!0x00000000b113f222.dds",
-            "def": "",
+            "id": "0x00000000!0x00000000b113f222.png",
             "name": "uitexture-map-level-desert"
         },
         {
-            "id": "0x00000000!0x00000000b1bd85f0.dds",
-            "def": "NPC_HotelManager_1_Def",
+            "id": "0x00000000!0x00000000b1bd85f0.png",
             "name": "uitexture-map-icon-hotel"
         },
         {
-            "id": "0x00000000!0x00000000c4744870.dds",
-            "def": "NPC_CostumeGirl_1_Def",
+            "id": "0x00000000!0x00000000c4744870.png",
             "name": "uitexture-map-icon-costumeshop"
         },
         {
-            "id": "0x00000000!0x00000000cbfd1542.dds",
-            "def": "",
+            "id": "0x00000000!0x00000000cbfd1542.png",
             "name": "uitexture-map-icon-house-cute"
         },
         {
-            "id": "0x00000000!0x00000000cd87629a.dds",
-            "def": "",
+            "id": "0x00000000!0x00000000cd87629a.png",
             "name": "uitexture-map-level-shared"
         },
         {
-            "id": "0x00000000!0x00000000e577e311.dds",
-            "def": "NPC_Cafe_Cedella_1_Def",
+            "id": "0x00000000!0x00000000e577e311.png",
             "name": "uitexture-map-icon-cafe"
         },
         {
-            "id": "0x00000000!0x00000000fabbdd26.dds",
-            "def": "",
+            "id": "0x00000000!0x00000000fabbdd26.png",
             "name": "uitexture-map-level-forest"
         }
     ]

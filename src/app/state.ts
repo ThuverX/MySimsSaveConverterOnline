@@ -1,6 +1,7 @@
 import { FileEntry } from "@/system/SaveConverter";
 import { atom, useAtom, useAtomValue } from "jotai";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { GCTImage } from "@/system/GCTImage";
 
 export const filesAtom = atom<FileEntry[]>([]);
 export const isEditorOpenAtom = atom<boolean>(false);
@@ -16,34 +17,103 @@ export function useHasChanged(file?: FileEntry) {
         (filesAtomValue.find((f) => f.Name === file.Name)?.HasChanged ?? false);
 }
 
-const statsAtom = atom<{
+type Stats = {
     SimName: string;
     TownName: string;
     NumStars: number;
     TimePlayed: string;
-}>({
-    SimName: "Unknown",
-    TownName: "Unknown",
-    NumStars: 0,
-    TimePlayed: "0:00:00",
+    loaded: boolean;
+};
+
+type MapBuilding = {
+    x: number;
+    y: number;
+    rot: number;
+    type: string;
+};
+
+type GameMap = {
+    name: string;
+    xml: string;
+    buildings: MapBuilding[];
+};
+
+type Maps = {
+    loaded: boolean;
+    maps: GameMap[];
+};
+
+const mapsAtom = atom<Maps>({
+    loaded: false,
+    maps: [],
 });
 
 function parseTimePlayed(hexTicks: string) {
-    const buf = Buffer.from(hexTicks, "hex");
-    const totalSeconds = buf.readDoubleBE(0);
-    return totalSeconds.toFixed(0);
-    // const hours = Math.floor(totalSeconds / 3600);
-    // const minutes = Math.floor((totalSeconds % 3600) / 60);
-    // const seconds = Math.floor(totalSeconds % 60);
-    // return `${hours}:${minutes.toString().padStart(2, "0")}:${
-    //     seconds.toString().padStart(2, "0")
-    // }`;
+    const ticks = BigInt("0x" + hexTicks);
+    let totalSeconds = Number(ticks / BigInt("60750352"));
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+    return `${hours}:${minutes.toString().padStart(2, "0")}:${
+        seconds.toString().padStart(2, "0")
+    }`;
+}
+
+const MAP_FILE_NAMES = ["desert.world", "forest.world", "townsquare.world"];
+
+export function useMaps() {
+    const files = useAtomValue(filesAtom);
+    const changedFilePaths = useAtomValue(changedFilePathsAtom);
+    const [maps, setMaps] = useAtom(mapsAtom);
+
+    useEffect(() => {
+        const mapFiles: GameMap[] = files.filter((f) =>
+            MAP_FILE_NAMES.includes(f.Name.toLowerCase())
+        ).map((f) => ({ name: f.Name, xml: f.GetText(), buildings: [] }));
+
+        for (let map of mapFiles) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(map.xml, "application/xml");
+
+            const buildings: MapBuilding[] = Array.from(
+                doc.querySelectorAll("Building"),
+            ).map((building) => {
+                const position = building.querySelector("Translation")
+                    ?.textContent
+                    .trim().split(" ").map(parseFloat)!;
+
+                const name = building.querySelector("ObjectDef")?.textContent!;
+
+                return ({
+                    x: position[0],
+                    y: position[2],
+                    rot: 0,
+                    type: name,
+                });
+            });
+
+            map.buildings = buildings;
+        }
+
+        setMaps({
+            loaded: mapFiles.length > 0,
+            maps: mapFiles,
+        });
+    }, [files, changedFilePaths]);
+
+    return maps;
 }
 
 export function useStats() {
     const files = useAtomValue(filesAtom);
     const changedFilePaths = useAtomValue(changedFilePathsAtom);
-    const [stats, setStats] = useAtom(statsAtom);
+    const [stats, setStats] = useState<Stats>({
+        loaded: false,
+        NumStars: 0,
+        SimName: "Unknown",
+        TimePlayed: "0:00:00",
+        TownName: "Unknown"
+    });
 
     useEffect(() => {
         let SimName = "Unknown";
@@ -61,6 +131,7 @@ export function useStats() {
                 TownName,
                 NumStars,
                 TimePlayed,
+                loaded: false,
             });
         }
 
@@ -86,8 +157,32 @@ export function useStats() {
             TownName,
             NumStars,
             TimePlayed,
+            loaded: true,
         });
     }, [files, changedFilePaths]);
 
     return stats;
+}
+
+
+export function usePlayerImage() {
+    const files = useAtomValue(filesAtom);
+    const changedFilePaths = useAtomValue(changedFilePathsAtom);
+    const [image, setImage] = useState<HTMLImageElement | null>(null);
+
+    useEffect(() => {
+        const gctFile = files.find((f) =>
+            f.Name.toLowerCase().endsWith(".xml.texture")
+        )
+
+        if(!gctFile) return
+
+        const gctImage = new GCTImage()
+        gctImage.read(new DataView(gctFile.GetData().buffer), 0)
+        gctImage.convertToImage()
+
+        setImage(gctImage.imageElement);
+    }, [files, changedFilePaths]);
+
+    return image
 }

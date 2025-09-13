@@ -46,6 +46,10 @@ export class FileEntry {
         return new TextDecoder("utf-8").decode(this.DataUncompressed)
     }
 
+    public GetData() {
+        return this.DataUncompressed
+    }
+
     public SetText(text: string) {
         this.DataUncompressed = new TextEncoder().encode(text)
         this.DataCompressed = zlib.deflateSync(Buffer.from(this.DataUncompressed), {
