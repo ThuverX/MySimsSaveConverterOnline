@@ -50,7 +50,7 @@ const mapsAtom = atom<Maps>({
 
 function parseTimePlayed(hexTicks: string) {
     const ticks = BigInt("0x" + hexTicks);
-    let totalSeconds = Number(ticks / BigInt("60750352"));
+    const totalSeconds = Number(ticks / BigInt("60750352"));
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = Math.floor(totalSeconds % 60);
@@ -71,17 +71,16 @@ export function useMaps() {
             MAP_FILE_NAMES.includes(f.Name.toLowerCase())
         ).map((f) => ({ name: f.Name, xml: f.GetText(), buildings: [] }));
 
-        for (let map of mapFiles) {
+        for (const map of mapFiles) {
             const parser = new DOMParser();
             const doc = parser.parseFromString(map.xml, "application/xml");
 
             const buildings: MapBuilding[] = Array.from(
                 doc.querySelectorAll("Building"),
             ).map((building) => {
-                const position = building.querySelector("Translation")
-                    ?.textContent
-                    .trim().split(" ").map(parseFloat)!;
-
+                //eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+                const position = building.querySelector("Translation")?.textContent.trim().split(" ").map(parseFloat)!;
+                //eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
                 const name = building.querySelector("ObjectDef")?.textContent!;
 
                 return ({

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { AlertCircleIcon, Edit, LucideHammer, LucideStar } from "lucide-react";
+import { AlertCircleIcon, LucideHammer } from "lucide-react";
 import { SaveConverter } from "@/system/SaveConverter";
 import { saveAs } from "file-saver";
 import { downloadZip } from "client-zip";
@@ -21,7 +21,6 @@ import {
 } from "@/components/ui/tooltip";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import Map from "./map";
 import PlayerImage from "./playerimage";
 
 const converter = new SaveConverter();

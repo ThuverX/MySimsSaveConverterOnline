@@ -120,7 +120,7 @@ const Editor = () => {
 						<div className="flex grow items-center justify-center">
 							<Alert variant="destructive" className="w-auto">
 								<AlertDescription>
-									Can't view this file type
+									Can&apos;t view this file type
 								</AlertDescription>
 							</Alert>
 						</div>

@@ -8,8 +8,8 @@ export class DXT3Image {
     }
 
     public fromGCT(image: GCTImage): Uint8Array {
-        let width = image.Width
-        let height = image.Height
+        const width = image.Width
+        const height = image.Height
 
         const bb = ByteBuffer.from(image.Pixels)
         bb.setEndianness(ByteBuffer.Endianness.LittleEndian)

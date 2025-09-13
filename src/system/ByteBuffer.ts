@@ -811,6 +811,7 @@ export class ByteBuffer {
     }
 }
 
+//eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace ByteBuffer {
     export enum Endianness {
         BigEndian = 'BE',
