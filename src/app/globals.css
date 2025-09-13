@@ -1,5 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import 'shadcn-prose';
+
+@font-face {
+    font-family: 'trebucbd';
+    src: url('/trebucbd.ttf');
+}
+@theme {
+  --font-trebuchet: 'trebucbd';
+}
 
 @custom-variant dark (&:is(.dark *));
 

@@ -1,0 +1,23 @@
+{
+    "desert.world": {
+        "offsetX": 23.200000762939453,
+        "offsetY": -17.600000381469727,
+        "width": 490,
+        "height": 360,
+        "scale": 3
+    },
+    "townsquare.world": {
+        "offsetX": -13.199999809265137,
+        "offsetY": -16.399999618530273,
+        "width": 320,
+        "height": 410,
+        "scale": 3
+    },
+    "forest.world": {
+        "offsetX": -4.400000095367432,
+        "offsetY": 0.800000011920929,
+        "width": 270,
+        "height": 400,
+        "scale": 3
+    }
+}
