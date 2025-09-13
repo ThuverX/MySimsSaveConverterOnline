@@ -75,23 +75,25 @@ export function useMaps() {
             const parser = new DOMParser();
             const doc = parser.parseFromString(map.xml, "application/xml");
 
-            const buildings: MapBuilding[] = Array.from(
-                doc.querySelectorAll("Building"),
-            ).map((building) => {
-                //eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-                const position: number[] = building.querySelector("Translation")?.textContent.trim().split(" ").map(parseFloat)!;
-                //eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-                const name: string = building.querySelector("ObjectDef")?.textContent!;
+            map.buildings = [];
 
-                return ({
+            for (const building of doc.querySelectorAll("Building")) {
+                if (!building) continue;
+
+                const TranslationElement = building.querySelector("Translation");
+                const ObjectDefElement = building.querySelector("ObjectDef");
+                if (!TranslationElement || !ObjectDefElement || !TranslationElement.textContent || !ObjectDefElement.textContent) continue;
+
+                const position: number[] = TranslationElement.textContent.trim().split(" ").map(parseFloat);
+                const name: string = ObjectDefElement.textContent;
+
+                map.buildings.push({
                     x: position[0],
                     y: position[2],
                     rot: 0,
                     type: name,
                 });
-            });
-
-            map.buildings = buildings;
+            }
         }
 
         setMaps({
@@ -111,7 +113,7 @@ export function useStats() {
         NumStars: 0,
         SimName: "Unknown",
         TimePlayed: "0:00:00",
-        TownName: "Unknown"
+        TownName: "Unknown",
     });
 
     useEffect(() => {
@@ -163,7 +165,6 @@ export function useStats() {
     return stats;
 }
 
-
 export function usePlayerImage() {
     const files = useAtomValue(filesAtom);
     const changedFilePaths = useAtomValue(changedFilePathsAtom);
@@ -172,16 +173,16 @@ export function usePlayerImage() {
     useEffect(() => {
         const gctFile = files.find((f) =>
             f.Name.toLowerCase().endsWith(".xml.texture")
-        )
+        );
 
-        if(!gctFile) return
+        if (!gctFile) return;
 
-        const gctImage = new GCTImage()
-        gctImage.read(new DataView(gctFile.GetData().buffer), 0)
-        gctImage.convertToImage()
+        const gctImage = new GCTImage();
+        gctImage.read(new DataView(gctFile.GetData().buffer), 0);
+        gctImage.convertToImage();
 
         setImage(gctImage.imageElement);
     }, [files, changedFilePaths]);
 
-    return image
+    return image;
 }
